@@ -680,8 +680,9 @@ select{
  */
 
 .table{
-    margin:0
+    margin:0;
 }
+
 table.table.table-bordered{
     border:1px solid #ccc;
     background:#fff
@@ -707,6 +708,7 @@ table.table.table-bordered th{
     outline:0;
     margin-left:5px
 }
+
 
 /* 
  * ----------------------------
