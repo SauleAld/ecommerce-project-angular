@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -15,8 +15,30 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+// import { OktaAuth } from '@okta/okta-auth-js';
+
+import { 
+  OKTA_CONFIG,
+  OktaAuthModule,
+  OktaCallbackComponent
+} from '@okta/okta-angular';
+import myappConfig from './config/myapp-config';
+
+const oktaConfig = Object.assign({
+  onAuthRequired: (injector) => {
+    const router = injector.get(Router);
+
+    router.navigate(['/login']);
+  }
+}, myappConfig.oidc);
+
+// const oktaAuth = new OktaAuth(oktaConfig);
 
 const routes: Routes = [
+  {path: 'login/callback', component: OktaCallbackComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'category/:id', component: ProductListComponent},
   {path: 'products', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
@@ -37,7 +59,9 @@ const routes: Routes = [
     ProductDetailComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    LoginComponent,
+    LoginStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +70,10 @@ const routes: Routes = [
     NgbModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    OktaAuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [{ provide: OKTA_CONFIG, useValue: oktaConfig}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
