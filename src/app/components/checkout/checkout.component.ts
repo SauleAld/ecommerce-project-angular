@@ -28,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   billingAddressStates: State[] = [];
   totalPrice: number;
   totalQuantity: number;
+  storage: Storage = sessionStorage;
 
   constructor(private formBuilder: FormBuilder,
               private formService: FormService,
@@ -48,7 +49,7 @@ export class CheckoutComponent implements OnInit {
                                Validators.minLength(2), 
                                FormValidators.notOnlyWhiteSpace]),
                                
-        email: new FormControl('',
+        email: new FormControl(JSON.parse(this.storage.getItem('userEmail')),
                               [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
@@ -204,6 +205,7 @@ export class CheckoutComponent implements OnInit {
         next: response => {
           alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
           this.resetCart();
+          this.storage.clear();
         },
         error: err => {
           alert(`There was an error: ${err.message}`);
