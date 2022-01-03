@@ -1,0 +1,18 @@
+<div class="container special-margin">
+    <h3>Order History</h3>
+    <table *ngIf="orderHistoryList.length > 0" class="table table-bordered">
+        <tr>
+            <th width="20%">Order Tracking Number</th>
+            <th width="10%">Total Price</th>
+            <th width="10%">Total Quantity</th>
+            <th width="10%">Date</th>
+        </tr>
+
+        <tr *ngFor="let order of orderHistoryList">
+            <td>{{order.orderTrackingNumber}}</td>
+            <td>{{order.totalPrice}}</td>
+            <td>{{order.totalQuantity}}</td>
+            <td>{{order.dateCreated}}</td>
+        </tr>
+    </table>
+</div>

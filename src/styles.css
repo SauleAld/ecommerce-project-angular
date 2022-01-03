@@ -214,7 +214,7 @@ section{
 }
 
 .au-input-xl{
-    min-width:935px
+    min-width:500px
 }
 
 input.au-input.au-input-xl{
@@ -514,7 +514,7 @@ input.au-input.au-input-xl{
     background:#fff
 }
 .main-content.page-m{
-    padding:10% 15%!important
+    padding: 10% 30% 10% 5%
 }
 
 /* 
@@ -680,9 +680,8 @@ select{
  */
 
 .table{
-    margin:0;
+    margin:0
 }
-
 table.table.table-bordered{
     border:1px solid #ccc;
     background:#fff
@@ -695,6 +694,9 @@ table.table.table-bordered th{
     color:#fff;
     font-size:14px;
     padding:7px
+}
+.special-margin {
+    margin: 150px 0;
 }
 .table-responsive{
     padding-right:1px
@@ -709,7 +711,6 @@ table.table.table-bordered th{
     margin-left:5px
 }
 
-
 /* 
  * ----------------------------
  * Product Details
@@ -721,13 +722,15 @@ table.table.table-bordered th{
     font-weight:800;
     color:#0da8e4
 }
+
 .detail-section{
     margin-top:60px
 }
 
-.detail-img {
+.detail-img{
     width: 30%;
 }
+
 /**/
 
 /* 
@@ -755,7 +758,12 @@ a.primary-btn:hover{
     background:#0da8e4;
     color:#fff
 }
-
+.login-status-header button {
+    padding: 7px 20px;
+    background: blue;
+    margin: 5px 15px;
+    border-radius: 10px;
+}
 .active-link {
   font-weight: bold;
 }
