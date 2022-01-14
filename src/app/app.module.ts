@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -28,6 +28,7 @@ import {
 import myappConfig from './config/myapp-config';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { AuthInterceptorService } from './service/auth-interceptor.service';
 
 const oktaConfig = Object.assign({
   onAuthRequired: (injector) => {
@@ -80,7 +81,8 @@ const routes: Routes = [
     OktaAuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [{ provide: OKTA_CONFIG, useValue: oktaConfig}],
+  providers: [{ provide: OKTA_CONFIG, useValue: oktaConfig},
+              {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
